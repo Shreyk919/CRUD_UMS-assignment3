@@ -8,14 +8,13 @@ import java.util.UUID
 class Repository extends DAO [User]{
   var dataRepository : Map[UUID , User] = Map()
 
-  override def createUser(user: User): Unit = dataRepository += (user.UUID -> user ) // Adding user to DataStructure
+  override def createUser(user: User): Unit = dataRepository += (user.UUID -> user )
 
-  override def listUser(): List[UUID] = dataRepository.keys.toList //Listing Users
+  override def listUser(): List[UUID] = dataRepository.keys.toList
 
-  override def updateUser(id: UUID, new_name: String) = { // Updating the Names of Users by UUID
+  override def updateUser(id: UUID, new_name: String) = {
     val user = User(id , new_name , dataRepository(id).usertype)
     dataRepository(id) == user
   }
 
-  override def deleteUser(id : UUID) = dataRepository -= id // Deleting user by UUID
-}
+  override def deleteUser(id : UUID) = dataRepository -= id
