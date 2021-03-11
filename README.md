@@ -4,7 +4,7 @@
 
 A basic User Management System that follows SOLID principles and uses mutable data structure.
 
-# The System performs the following operations
+## The System performs the following operations
 
 * Create User and define its type
 * Read User using the Random ID generated
@@ -12,4 +12,4 @@ A basic User Management System that follows SOLID principles and uses mutable da
 * Delete User from database
 
 
-# The above operations are performed by multiple classes
+## The above operations are performed by multiple classes
