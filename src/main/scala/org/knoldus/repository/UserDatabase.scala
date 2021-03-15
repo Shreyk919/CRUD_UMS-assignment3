@@ -38,9 +38,10 @@ import scala.collection.mutable.ListBuffer
     override def readbyID (id : Option[UUID]) : User = {
 
       val newList = inputList.filter(user => {user.id == id})
-      if (newList != null)
+      if (newList.isEmpty)
       {
         throw new NoSuchElementException
+        {"User ID invalid! /n User does not exist"}
       }
       else
       {
