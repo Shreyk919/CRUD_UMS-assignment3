@@ -21,4 +21,24 @@ All files are packed in org.knoldus package
 * repositiry -> UserDatabase
 * UserService -> UserFunctions
 
+## Test cases added. 
+
+* To test code 
+
+```
+  $ sbt test
+```
+
+* To check coverage
+
+```
+$ sbt clean coverage test
+```
+
+* To get coverage report
+
+```
+$ sbt coverageReport
+```
+
 
