@@ -1,60 +1,41 @@
 package org.knoldus.bootstrap
 
-import org.knoldus.dao.Dao
-import org.knoldus.repository.UserDatabase
-import org.knoldus.model.User
-import org.knoldus.UserService.UserFunctions
-import org.knoldus.model.User_Type
+import org.knoldus.repository.{Dao, UserDatabase}
+import org.knoldus.model.{userType, User}
+import org.knoldus.userFunctions.UserService
 
-  /*
-   Main object
-   */
-  object main {
-
-  /*
-   Created main method to check the CRUD operations
-   */
-    def main(args: Array[String]): Unit = {
-
-      val userDataBase:Dao[User] = new UserDatabase()
-      val userOperations = new UserFunctions(userDataBase)
-
-      /**
-       * Input Users :- Admin and Customer
-       */
-      val Admin = User(None, "Shreyash", "sk123", "Male", 20, User_Type.admin)
-
-      val user1 = User(None, "Saksham", "Password1#", "Male", 19, User_Type.customer)
-
-      val user2 = User(None, "Dhruv", "dv123", "Male", 21, User_Type.customer)
-
-      val user3 = User(None, "Shivani", "sv2354", "Female", 21, User_Type.customer)
-
-      /*
-        read the inputs from above
-       */
-      val Admin_id = userOperations.getUser(Admin)
-      val user1_id = userOperations.getUser(user1)
-      val user2_id = userOperations.getUser(user2)
-      val user3_id = userOperations.getUser(user3)
+object main {
 
 
-      /**
-       * List all users together at once
-       */
-      println(userOperations.getAllUsers)
+  def main(args: Array[String]): Unit = {
 
-      /**
-       * check the update operation by updating admin
-       */
-      val updated_user2= userOperations.getUserByID(user1_id).copy(name = "ashu")
-      userOperations.updateUser(user1_id, updated_user2)
+    val userDB:Dao[User] = new UserDatabase()
+    val userService = new UserService(userDB)
 
-      /**
-       * TO Delete any entry
-       */
-      userOperations.deleteUser(user3_id)
 
+    val Administrator = User(None, "Shreyash Kumar", userType.Admin)
+    val user1 = User(None, "Saksham Kumar", userType.Customer)
+    val user2 = User(None, "Abhay Raj", userType.Customer)
+    val user3 = User(None, "Dhruv", userType.Customer)
+
+
+    val ADMINID = userService.createUser(Administrator)
+    val user1ID = userService.createUser(user1)
+    val user2ID = userService.createUser(user2)
+    val user3ID = userService.createUser(user3)
+
+    println("List of All Users => " + userService.getAllUsers)
+
+
+    val updated_user2= userService.getUserByID(user1ID).copy(name = "Ashu")
+
+    userService.updateUser(user1ID, updated_user2)
+
+    println("Updated User => " + userService.getUserByID(user1ID))
+
+    userService.deleteUser(user1ID)
+
+    userService.getUserByID(user1ID)
   }
 
 }
